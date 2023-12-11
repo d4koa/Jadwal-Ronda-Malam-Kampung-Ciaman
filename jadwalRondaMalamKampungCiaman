@@ -1,0 +1,241 @@
+#include <iostream>
+using namespace std;
+
+class OPERASI {
+protected:
+    int code;
+    string senin[5];
+    string selasa[5];
+    string rabu[5];
+    string kamis[5];
+    string jumat[5];
+    string sabtu[5];
+    string minggu[5];
+
+    void clearScreen(){
+        system("CLS");
+    };
+
+    virtual void header(){
+        clearScreen();
+        cout << "=======================================================" << endl;
+    };
+
+    virtual void footer(){
+        cout << "=======================================================" << endl;
+    };
+
+    int kode(){
+        cin >> code;
+        return code;
+    };
+
+    void tutupProgram(){
+        cout << "=======================================================" << endl;
+        cout << "OK PROGRAM SELESAI SAMPAI SINI, TERIMA KASIH BANYAK! :)" << endl;
+        cout << "=======================================================" << endl;
+    };
+
+    void insertJadwalRonda() {
+        cout << "Masukkan nama-nama warga untuk Senin:\n";
+        for (int i = 0; i < 5; ++i) {
+            cout << "Nama warga " << i + 1 << ": ";
+            cin >> senin[i];
+        }; cout << "\n";
+
+        cout << "Masukkan nama-nama warga untuk Selasa:\n";
+        for (int i = 0; i < 5; ++i) {
+            cout << "Nama warga " << i + 1 << ": ";
+            cin >> selasa[i];
+        }; cout << "\n";
+
+        cout << "Masukkan nama-nama warga untuk Rabu:\n";
+        for (int i = 0; i < 5; ++i) {
+            cout << "Nama warga " << i + 1 << ": ";
+            cin >> rabu[i];
+        }; cout << "\n";
+
+        cout << "Masukkan nama-nama warga untuk Kamis:\n";
+        for (int i = 0; i < 5; ++i) {
+            cout << "Nama warga " << i + 1 << ": ";
+            cin >> kamis[i];
+        }; cout << "\n";
+
+        cout << "Masukkan nama-nama warga untuk Jumat:\n";
+        for (int i = 0; i < 5; ++i) {
+            cout << "Nama warga " << i + 1 << ": ";
+            cin >> jumat[i];
+        }; cout << "\n";
+
+        cout << "Masukkan nama-nama warga untuk Sabtu:\n";
+        for (int i = 0; i < 5; ++i) {
+            cout << "Nama warga " << i + 1 << ": ";
+            cin >> sabtu[i];
+        }; cout << "\n";
+
+        cout << "Masukkan nama-nama warga untuk Minggu:\n";
+        for (int i = 0; i < 5; ++i) {
+            cout << "Nama warga " << i + 1 << ": ";
+            cin >> minggu[i];
+        }; cout << "\n";
+    };
+
+    void tampilkanJadwalRonda() {
+        cout << "Senin: |";
+        for (int i = 0; i < 5; ++i) {
+            cout << senin[i] << "|";
+        }; cout << endl;
+
+        cout << "Selasa: |";
+        for (int i = 0; i < 5; ++i) {
+            cout << selasa[i] << "|";
+        }; cout << endl;
+
+        cout << "Rabu: |";
+        for (int i = 0; i < 5; ++i) {
+            cout << rabu[i] << "|";
+        }; cout << endl;
+
+        cout << "Kamis: |";
+        for (int i = 0; i < 5; ++i) {
+            cout << kamis[i] << "|";
+        }; cout << endl;
+
+        cout << "Jumat: |";
+        for (int i = 0; i < 5; ++i) {
+            cout << jumat[i] << "|";
+        }; cout << endl;
+
+        cout << "Sabtu: |";
+        for (int i = 0; i < 5; ++i) {
+            cout << sabtu[i] << "|";
+        }; cout << endl;
+
+        cout << "Minggu: |";
+        for (int i = 0; i < 5; ++i) {
+            cout << minggu[i] << "|";
+        }; cout << "\n\n";
+    }
+};
+
+
+class LAPORAN : public OPERASI{
+protected:
+    string tgl;
+    string hari;
+    string bulan;
+    string tahun;
+    string pukul;
+    string status;
+    string uraian;
+
+    void insertLaporanRonda(){
+        cout << "Masukkan laporan ronda malam untuk:\n";
+        cout << "Hari       : "; cin >> hari;
+        cout << "Tanggal    : "; cin >> tgl;
+        cout << "Bulan      : "; cin >> bulan;
+        cout << "Tahun      : "; cin >> tahun;
+        cout << "Pukul      : "; cin >> pukul;
+        cout << "Status     : "; cin >> status;
+        cout << "Uraian     : "; cin.ignore(); getline(cin, uraian);
+    }
+
+    void tampilkanLaporanRonda(){
+        cout << "Laporan ronda malam kampung Ciaman \n";
+        cout << "Pada hari " + hari + ", tanggal " + tgl + " "
+                + bulan + " " + tahun + ", malam hari ini " + status + ". \n";
+        cout << uraian + ". \n";
+    }
+
+    void insertShowLaporanRonda(){
+        insertLaporanRonda(); cout << "\n";
+        tampilkanLaporanRonda(); cout << "\n";
+    }
+};
+
+
+class MENU : public LAPORAN{
+public:
+    void header(){
+        clearScreen();
+        cout << "=======================================================" << endl;
+        cout << "       PROGRAM JADWAL RONDA MALAM KAMPUNG CIAMAN       " << endl;
+        cout << "=======================================================" << endl;
+    }
+
+    void footer(){
+        cout << "=======================================================" << endl;
+        cout << "Pilih dan masukkan kode sesuai pada menu, input here: ";
+    }
+
+    void menuUtama(){
+        header();
+        cout << "                      MENU UTAMA                     \n" << endl;
+        cout << " [1] INSERT JADWAL \n\n";
+        cout << " [2] SHOW JADWAL \n\n";
+        cout << " [3] INSERT & SHOW LAPORAN \n\n";
+        cout << " [4] EXIT \n\n";
+        footer();
+
+        switch(kode()){
+        case 1:insertJadwal();break;
+        case 2:showJadwal();break;
+        case 3:insertShowLaporan();break;
+        case 4:tutupProgram();break;
+        default :menuUtama();break;
+        }
+    }
+
+    void showJadwal(){
+        header();
+        cout << "                       SHOW JADWAL                   \n" << endl;
+        tampilkanJadwalRonda();
+        cout << " [1] KEMBALI \n\n";
+        cout << " [2] EXIT \n\n";
+        footer();
+
+        switch(kode()){
+        case 1:menuUtama();break;
+        case 2:tutupProgram();break;
+        default :showJadwal();break;
+        }
+    }
+
+    void insertJadwal(){
+        header();
+        cout << "                      INSERT JADWAL                  \n" << endl;
+        insertJadwalRonda();
+        header();
+        cout << "                       SHOW JADWAL                   \n" << endl;
+        tampilkanJadwalRonda();
+        cout << " [1] KEMBALI \n\n";
+        cout << " [2] EXIT \n\n";
+        footer();
+
+        switch(kode()){
+        case 1:menuUtama();break;
+        case 2:tutupProgram();break;
+        default :showJadwal();break;
+        }
+    }
+
+    void insertShowLaporan(){
+        header();
+        cout << "                   INSERT & SHOW LAPORAN             \n" << endl;
+        insertShowLaporanRonda();
+        cout << " [1] KEMBALI \n\n";
+        cout << " [2] EXIT \n\n";
+        footer();
+
+        switch(kode()){
+        case 1:menuUtama();break;
+        case 2:tutupProgram();break;
+        default :showJadwal();break;
+        }
+    }
+};
+
+int main(){
+    MENU menu;
+    menu.menuUtama();
+};
